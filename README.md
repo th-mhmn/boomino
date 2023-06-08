@@ -11,13 +11,17 @@ responsiveness is not bad, didn't have much time to work on that, too, but maybe
 the part for posting new users is implemented, but the website reqres.in isn't really optimized, maybe you don't get what you want on the UI,
 you can check the code though. (post request is implemented, no worries.)
 
+also the search UI is implemented, but the api does not support a search api.
+
 libraries being used:
-NextJS
-TailwindCSS
-FramerMotion
+NextJS, 
+TailwindCSS, 
+FramerMotion, 
 Axios
 
 developed using NextJS, clone and use `npm run dev`
+
+for further implementations, check out the websites I've created and mentioned om my resume.
 
 
 Thanks for your attention,

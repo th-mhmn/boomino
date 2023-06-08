@@ -151,7 +151,11 @@ const UserDetails = ({ id, setShowUser }) => {
       }
     >
       {data ? (
-        <div className={'p-6 bg-white rounded-xl w-1/3 text-center'}>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className={'p-6 bg-white rounded-xl w-1/3 text-center'}
+        >
           <div className={'grid grid-cols-3 items-center'}>
             <img
               src={data.data.avatar}
@@ -181,7 +185,7 @@ const UserDetails = ({ id, setShowUser }) => {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       ) : (
         <Loader />
       )}

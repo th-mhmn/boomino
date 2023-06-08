@@ -4,6 +4,7 @@ I didn't have much time, but managed to do some stuff on this project as below:
 
 app is connected to the api, pagination works fine.
 animations and add user implemented, too.
+new: single user details implemented: click on user to get info 
 
 responsiveness is not bad, didn't have much time to work on that, too, but maybe I could manage to fix that later on future projects (?)
 

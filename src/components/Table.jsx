@@ -12,6 +12,7 @@ const Table = () => {
   const [page, setPage] = useState(1);
   const [users, setUsers] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [showUser, setShowUser] = useState(null);
 
   useEffect(() => {
     async function getData() {
@@ -26,6 +27,7 @@ const Table = () => {
     <>
       <AddNew setShowModal={setShowModal} />
       {showModal && <Modal setShowModal={setShowModal} />}
+      {showUser && <UserDetails id={showUser} setShowUser={setShowUser} />}
       {data ? (
         <div
           className={
@@ -33,7 +35,7 @@ const Table = () => {
           }
         >
           <Header />
-          <Body users={users} />
+          <Body users={users} setShowUser={setShowUser} />
           <Footer
             page={data.page}
             setPage={setPage}
@@ -125,11 +127,73 @@ const Modal = ({ setShowModal }) => {
   );
 };
 
+const UserDetails = ({ id, setShowUser }) => {
+  const URL = "https://reqres.in/api";
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const getData = async () => {
+      const res = await axios.get(`${URL}/users/${id}`);
+      setData(res.data);
+    };
+    getData();
+    data && console.log(data);
+  }, [id]);
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className={
+        "absolute flex justify-center items-center w-full h-full bg-gray-500 bg-opacity-75"
+      }
+      onClick={(event) =>
+        event.target === event.currentTarget && setShowUser(null)
+      }
+    >
+      {data ? (
+        <div className={"p-6 bg-white rounded-xl w-1/3 text-center"}>
+          <div className={"grid grid-cols-3 items-center"}>
+            <img
+              src={data.data.avatar}
+              alt={data.data.first_name}
+              className={"rounded-full"}
+            />
+            <div
+              className={"col-span-2 justify-self-start flex flex-col gap-y-4"}
+            >
+              <div>
+                <h3>
+                  <span className={"text-blue-500"}>First Name: </span>
+                  <span className={"text-lg"}>{data.data.first_name}</span>
+                </h3>
+              </div>
+              <div>
+                <h3>
+                  <span className={"text-blue-500"}>Last Name: </span>
+                  <span className={"text-lg"}>{data.data.last_name}</span>
+                </h3>
+              </div>
+              <div>
+                <h3>
+                  <span className={"text-blue-500"}>Email Address: </span>
+                  <span className="text-lg">{data.data.email}</span>
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <Loader />
+      )}
+    </motion.div>
+  );
+};
+
 // Sub-Components:
 const Header = () => {
   return (
     <>
-      <div className={"grid grid-cols-10 justify-items-center"}>
+      <div className={"grid grid-cols-10 justify-items-center px-2"}>
         <h3 className={"justify-self-start"}>Image</h3>
         <h3 className={"col-span-3"}>Name</h3>
         <h3 className={"col-span-3"}>Email</h3>
@@ -141,22 +205,32 @@ const Header = () => {
   );
 };
 
-const Body = ({ users }) => {
+const Body = ({ users, setShowUser }) => {
   return (
     <div className={"text-gray-500"}>
-      {users && users.map((user) => <User key={user.id} user={user} />)}
+      {users &&
+        users.map((user) => (
+          <User
+            key={user.id}
+            user={user}
+            handleUserClick={() => {
+              setShowUser(user.id);
+            }}
+          />
+        ))}
     </div>
   );
 };
 
-const User = ({ user }) => {
+const User = ({ user, handleUserClick }) => {
   return (
     <motion.div
       initial={{ y: 30, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       className={
-        "grid grid-cols-10 justify-items-center items-center py-3 border-b-2 border-gray-100"
+        "px-2 grid grid-cols-10 justify-items-center items-center py-3 border-b-2 border-gray-100 cursor-pointer hover:bg-gray-50 transition ease-in rounded-md"
       }
+      onClick={handleUserClick}
     >
       <Avatar
         src={user.avatar}

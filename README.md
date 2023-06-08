@@ -19,7 +19,8 @@ TailwindCSS,
 FramerMotion, 
 Axios
 
-developed using NextJS, clone and use `npm run dev`
+developed using NextJS, clone and use `npm run dev`, 
+or just visit `https://boomino.vercel.app/`
 
 for further implementations, check out the websites I've created and mentioned om my resume.
 

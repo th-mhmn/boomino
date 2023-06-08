@@ -20,7 +20,7 @@ FramerMotion,
 Axios
 
 developed using NextJS, clone and use `npm run dev`, 
-or just visit `https://boomino.vercel.app/`
+or just visit `https://boomino.vercel.app/`, or `https://boomino-git-main-th-mhmn.vercel.app/`
 
 for further implementations, check out the websites I've created and mentioned om my resume.
 

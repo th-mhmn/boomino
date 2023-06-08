@@ -17,5 +17,8 @@ TailwindCSS
 FramerMotion
 Axios
 
+developed using NextJS, clone and use `npm run dev`
+
+
 Thanks for your attention,
 Taha Mehmandoust
